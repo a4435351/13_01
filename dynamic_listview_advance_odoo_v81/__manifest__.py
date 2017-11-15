@@ -6,7 +6,7 @@
     'description': """
         SU Dynamic ListView Odoo 10
     """,
-    'author': "startup",
+    'author': "truongdung.vd@gmail.com",
     'depends': ['web'],
     'data': [
         'views/templates.xml',
