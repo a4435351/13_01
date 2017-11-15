@@ -17,7 +17,7 @@
         'static/src/xml/base.xml',
     ],
     'images': ['images/main_screen.jpg'],
-    'price': 190,
+    'price': 250,
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
