@@ -19,7 +19,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
     res = _fields_view_get(self, view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
     # if view_type in ['list', 'tree'] and (odoo.SUPERUSER_ID ==
     # self.env.user.id or self.env.ref('su_dynamic_listview.group_show_field') in self.env.user.groups_id):
-    if view_type in ['list', 'tree']:
+    if view_type in ['list', 'tree'] and and 'show.field' in self.env.registry.models:
         shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                  ('view_id', '=', res.get('view_id', False)),
                                                  ('create_uid', '=', self.env.user.id)])
