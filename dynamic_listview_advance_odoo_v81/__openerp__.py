@@ -1,12 +1,12 @@
 {
-    'name': 'Dynamic ListView Advance V8',
+    'name': 'First Status',
     'summary': 'Change The Odoo List view On the fly without any technical knowledge',
     'version': '1.0',
     'category': 'Web',
     'description': """
 
     """,
-    'author': "Apps for Odoo",
+    'author': "",
     'depends': ['web'],
     'data': ['templates.xml',
              'security/show_fields_security.xml',
@@ -18,6 +18,6 @@
     'application': False,
     'qweb': ['static/src/xml/listview_button_view.xml'],
     'images': [
-        'images/4.jpg',
+ 
     ],
 }
