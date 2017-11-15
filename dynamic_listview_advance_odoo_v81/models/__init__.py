@@ -1,2 +1,2 @@
-from . import show_fields
-from . import models
+import show_fields
+import models

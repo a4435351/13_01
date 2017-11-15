@@ -18,22 +18,22 @@
                     </div>
                     <div class="su_dropdown">
                         <ul class="o_filters_menu" id="ul_fields_show" role="menu">
-                            <t t-foreach="widget.renderer.columns" t-as="field">
-                                <li class="selected" t-att-name="field.attrs.name">
+                            <t t-foreach="widget.visible_columns" t-as="field">
+                                <li class="selected" t-att-name="field.name">
                                     <span class="span_ticked">&#xf00c;</span>
-                                    <a><t t-esc="widget._get_node_string(field)" /></a>
-                                    <input type="text" t-att-value="widget._get_node_string(field)" />
-                                    <t t-set="record" t-value="_record.push(field.attrs.name)" />
+                                    <a><t t-esc="field.string or ' '" /></a>
+                                    <input type="text" t-att-value="field.string or ' '" />
+                                    <t t-set="record" t-value="_record.push(field.name)" />
                                 </li>
                             </t>
-                            <t t-foreach="widget.renderer.state.fields" t-as="field">
+                            <t t-foreach="widget.fields_get" t-as="field">
                                 <t t-if="_record.indexOf(field) == -1">
                                     <li t-att-name="field">
                                         <span>&#xf00c;</span>
                                         <a>
-                                            <t t-esc="widget.renderer.state.fields[field].string" />
+                                            <t t-esc="widget.fields_get[field].string" />
                                         </a>
-                                        <input type="text" t-att-value="widget.renderer.state.fields[field].string" />
+                                        <input type="text" t-att-value="widget.fields_get[field].string" />
                                     </li>
                                 </t>
                             </t>

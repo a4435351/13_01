@@ -1,29 +1,9 @@
-odoo.define('su_dynamic_listview_11.dynamic_listview', function(require) {
-    var core = require('web.core');
+odoo.define('su_dynamic_listview.dynamic_listview', function(require) {
+    var Model = require('web.Model');
     var ListView = require('web.ListView');
-    var ListRenderer = require('web.ListRenderer');
-    var ListController = require('web.ListController');
 
     ListView.include({
-        init: function (viewInfo, params) {
-            this._super(viewInfo, params);
-            this.rendererParams.viewInfo = viewInfo;
-        }
-    });
-
-    ListRenderer.include({
-        init: function (parent, state, params) {
-            this._super(parent, state, params);
-            this.viewInfo = params.viewInfo;
-        },
-    });
-
-    ListController.include({
-        init: function (parent, model, renderer, params) {
-            this._super(parent, model, renderer, params);
-            this.viewInfo = renderer.viewInfo;
-        },
-        renderButtons: function($node) {
+        render_buttons: function($node) {
             this._super($node);
             if (this.$buttons) {
                 this.$buttons.on('click', '.su_fields_show li', this.proxy('onClickShowField'));
@@ -65,12 +45,8 @@ odoo.define('su_dynamic_listview_11.dynamic_listview', function(require) {
         },
         updateShowField: function () {
             // var self = this;
-            var values = {model: this.modelName, view_id: this.viewInfo.view_id, fields_show: this.getFieldsShow()};
-            this._rpc({
-                model: 'show.field',
-                method: 'change_fields',
-                kwargs: {values: values},
-            }).then(function (result) {
+            var values = {model: this.model, view_id: this.fields_view.view_id, fields_show: this.getFieldsShow()};
+            new Model("show.field").call('change_fields',  [values]).done(function (result) {
                 location.reload();
             });
         },

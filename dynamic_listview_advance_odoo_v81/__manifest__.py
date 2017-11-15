@@ -1,10 +1,10 @@
 {
-    'name': 'SU Dynamic ListView Odoo11',
-    'summary': 'SU Dynamic ListView Odoo 11',
+    'name': 'SU Dynamic ListView Odoo 10',
+    'summary': 'SU Dynamic ListView Odoo 10',
     'version': '1.0',
     'category': 'Web',
     'description': """
-        SU Dynamic ListView Odoo 11
+        SU Dynamic ListView Odoo 10
     """,
     'author': "startup",
     'depends': ['web'],
@@ -17,7 +17,7 @@
         'static/src/xml/base.xml',
     ],
     'images': ['images/main_screen.jpg'],
-    'price': 190,
+    'price': 250,
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
