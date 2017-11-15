@@ -1,4 +1,4 @@
-odoo.define('su_dynamic_listview.dynamic_listview', function(require) {
+odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(require) {
     var Model = require('web.Model');
     var ListView = require('web.ListView');
 
