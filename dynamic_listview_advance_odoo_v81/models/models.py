@@ -51,5 +51,6 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
             res['fields'] = _fields
     return res
 
+
 AbstractModel.load_views = load_views
 AbstractModel.fields_view_get = fields_view_get

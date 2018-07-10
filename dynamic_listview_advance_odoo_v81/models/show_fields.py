@@ -22,4 +22,5 @@ class SUShowFields(models.Model):
             self.create(values)
         return True
 
+
 SUShowFields()
