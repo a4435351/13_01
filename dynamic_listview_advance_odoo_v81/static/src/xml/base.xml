@@ -10,6 +10,15 @@
                 <t t-set="_record" t-value="[]"/>
                 <div class="dropdown-menu">
                     <div class="su_action">
+                        <t t-if="widget.uid == 1">
+                            <t t-if="widget.viewInfo.for_all_user">
+                                <input id="apply_for_all_user" name="apply_for_all_user" checked="checked" type="checkbox" />
+                            </t>
+                            <t t-if="!widget.viewInfo.for_all_user">
+                                <input id="apply_for_all_user" name="apply_for_all_user" type="checkbox" />
+                            </t>
+                            <label for="apply_for_all_user">Apply for all Users</label>
+                        </t>
                         <a title="Update" action="update" class="btn btn-default update_fields_show">
                             <i class="fa fa-refresh fa-spin fa-1x fa-fw"
                                title="Update" aria-hidden="true"></i>

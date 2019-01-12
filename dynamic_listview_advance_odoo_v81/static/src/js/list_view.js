@@ -1,19 +1,25 @@
 odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(require) {
     var Model = require('web.Model');
+    var session = require('web.session');
     var ListView = require('web.ListView');
 
     ListView.include({
         render_buttons: function($node) {
             this._super($node);
+            this.uid = session.uid;
             if (this.$buttons) {
                 this.$buttons.on('click', '.su_fields_show li', this.proxy('onClickShowField'));
                 this.$buttons.on('click', '.update_fields_show', this.proxy('updateShowField'));
                 this.$buttons.on('keypress', '.su_dropdown li > input', this.proxy('onChangeStringField'));
                 this.$buttons.on('focusout', '.su_dropdown li > input', this.proxy('onFocusOutTextField'));
                 this.$buttons.on('click', '.su_fields_show li > span', this.proxy('onClickSpanCheck'));
+                this.$buttons.on('click', '#apply_for_all_user', this.proxy('onClickApplyAll'));
                 this.$buttons.find('#ul_fields_show').sortable();
                 this.$buttons.find('#ul_fields_show').disableSelection();
             }
+        },
+        onClickApplyAll: function(e){
+            e.stopPropagation();
         },
         onClickSpanCheck: function (e) {
             var self = $(e.currentTarget);

@@ -22,7 +22,15 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
     if view_type in ['list', 'tree'] and 'show.field' in self.env.registry.models:
         shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                  ('view_id', '=', res.get('view_id', False)),
-                                                 ('create_uid', '=', self.env.user.id)])
+                                                 ('create_uid', '=', 1)], limit=1)
+        # shf_obj = self.env['show.field'].search([('model', '=', self._name),
+        #                                          ('view_id', '=', res.get('view_id', False)),
+        #                                          ('create_uid', '=', self.env.user.id)])
+        if not shf_obj.for_all_user:
+            hide_button = False
+            shf_obj = self.env['show.field'].search([('model', '=', self._name),
+                                                     ('view_id', '=', res.get('view_id', False)),
+                                                     ('create_uid', '=', self.env.user.id)], limit=1)
         if shf_obj:
             doc = etree.XML(res['arch'])
             fields_show = eval(shf_obj[0].fields_show)
@@ -49,7 +57,10 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
                 self._name, etree.fromstring(res['arch']), view_id)
             res['arch'] = _arch
             res['fields'] = _fields
+    res['fields_get'] = self.env[self._name].fields_get()
+    res['hide_button'] = hide_button
     return res
+
 
 AbstractModel.load_views = load_views
 AbstractModel.fields_view_get = fields_view_get
