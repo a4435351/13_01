@@ -18,6 +18,15 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
                 this.$buttons.find('#ul_fields_show').disableSelection();
             }
         },
+        _get_node_string: function(field_name) {
+            var field = this.viewInfo.fields[field_name];
+            var _field = this.viewInfo.fieldsInfo.list[field_name];
+            var result = field.string;
+            if (_field.hasOwnProperty("string")) {
+                result = _field.string;
+            }
+            return result;
+        },
         onClickApplyAll: function(e){
             e.stopPropagation();
         },
