@@ -1,10 +1,10 @@
 {
-    'name': 'SU Dynamic ListView Odoo11',
-    'summary': 'SU Dynamic ListView Odoo 11',
+    'name': 'SU Dynamic ListView Odoo12',
+    'summary': 'SU Dynamic ListView Odoo 12',
     'version': '1.0',
     'category': 'Web',
     'description': """
-        SU Dynamic ListView Odoo 11
+        SU Dynamic ListView Odoo 12
     """,
     'author': "truongdung.vd@gmail.com",
     'depends': ['web'],
