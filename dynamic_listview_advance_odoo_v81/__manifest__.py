@@ -23,6 +23,6 @@
     'auto_install': False,
     'application': False,
     'images': [
-        'static/description/module_image.jpg',
+        'static/description/module_image.png',
     ],
 }
