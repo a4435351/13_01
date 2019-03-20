@@ -11,7 +11,6 @@ class SUShowFields(models.Model):
 
     @api.model
     def change_fields(self, values):
-        print(values)
         records = self.search([("model", "=", values.get("model", False)),
                                ("create_uid", "=", self.env.user.id),
                                ("view_id", '=', values.get("view_id", False))])
@@ -20,6 +19,15 @@ class SUShowFields(models.Model):
             records[0].write(values)
         else:
             self.create(values)
+        return True
+
+    @api.model
+    def delete_show_fields(self, values):
+        records = self.search([("model", "=", values.get("model", False)),
+                               ("create_uid", "=", self.env.user.id),
+                               ("view_id", '=', values.get("view_id", False))])
+        if records:
+            records.unlink()
         return True
 
 

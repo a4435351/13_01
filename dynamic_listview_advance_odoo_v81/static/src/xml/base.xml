@@ -10,28 +10,49 @@
                 <t t-set="_record" t-value="[]"/>
                 <div class="dropdown-menu">
                     <div class="su_action">
+                        <a title="Reset" action="update" style="float: left" class="btn btn-secondary reset_fields_show">
+                            <span style="font-size: 20px" class="fa fa-undo"></span>
+                        </a>
                         <a title="Update" action="update" class="btn btn-secondary update_fields_show">
-                            <span class="fa fa-refresh"></span>
+                            <span style="font-size: 20px" class="fa fa-refresh"></span>
                         </a>
                     </div>
                     <div class="su_dropdown">
                         <ul class="o_filters_menu" id="ul_fields_show" role="menu">
                             <t t-foreach="widget.renderer.columns" t-as="field">
                                 <li class="selected" t-att-name="field.attrs.name">
-                                    <span class="span_ticked">&#xf00c;</span>
-                                    <a><t t-esc="widget._get_node_string(field)" /></a>
-                                    <input type="text" t-att-value="widget._get_node_string(field)" />
-                                    <t t-set="record" t-value="_record.push(field.attrs.name)" />
+                                    <div style="display: flex">
+                                        <div style="margin: auto 0;">
+                                            <span class="fa fa-arrows span_ticked"></span>
+                                        </div>
+                                        <div class="lilo" style="display: inline-block; flex: 1;margin: auto 0">
+                                            <a><t t-esc="widget._get_node_string(field)" /></a>
+                                            <input type="text" class="input_l" t-att-value="widget._get_node_string(field)" />
+                                            <t t-set="record" t-value="_record.push(field.attrs.name)" />
+                                        </div>
+                                        <div class="cb_ok" style="padding-left: 5px;margin: auto 0">
+                                          <input type="checkbox" checked="checked" t-att-id="field.attrs.name" value="Rainbow Dash" /><label t-att-for="field.attrs.name"></label>
+                                        </div>
+                                    </div>
                                 </li>
                             </t>
                             <t t-foreach="widget.renderer.state.fields" t-as="field">
                                 <t t-if="_record.indexOf(field) == -1">
                                     <li t-att-name="field">
-                                        <span>&#xf00c;</span>
-                                        <a>
-                                            <t t-esc="widget.renderer.state.fields[field].string" />
-                                        </a>
-                                        <input type="text" t-att-value="widget.renderer.state.fields[field].string" />
+                                        <div style="display: flex">
+                                            <div style="margin: auto 0;">
+                                                <span class="fa fa-arrows span_ticked"></span>
+                                            </div>
+                                            <div class="lilo" style="display: inline-block; flex: 1;margin: auto 0">
+                                                <a>
+                                                    <t t-esc="widget.renderer.state.fields[field].string" />
+                                                </a>
+                                                <input type="text" class="input_l" t-att-value="widget.renderer.state.fields[field].string" />
+                                            </div>
+                                            <div class="cb_ok" style="padding-left: 5px;margin: auto 0">
+                                              <input type="checkbox" t-att-id="field" value="Rainbow Dash" /><label t-att-for="field"></label>
+                                            </div>
+                                        </div>
                                     </li>
                                 </t>
                             </t>

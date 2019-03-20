@@ -35,21 +35,30 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
             this._super($node);
             if (this.$buttons) {
                 this.$buttons.on('click', '.su_fields_show li', this.proxy('onClickShowField'));
+                this.$buttons.on('click', '.reset_fields_show', this.proxy('resetShowField'));
                 this.$buttons.on('click', '.update_fields_show', this.proxy('updateShowField'));
                 this.$buttons.on('keypress', '.su_dropdown li > input', this.proxy('onChangeStringField'));
                 this.$buttons.on('focusout', '.su_dropdown li > input', this.proxy('onFocusOutTextField'));
-                this.$buttons.on('click', '.su_fields_show li > span', this.proxy('onClickSpanCheck'));
+                this.$buttons.on('click', '.su_fields_show li .cb_ok input', this.proxy('onClickSpanCheck'));
                 this.$buttons.find('#ul_fields_show').sortable();
                 this.$buttons.find('#ul_fields_show').disableSelection();
             }
         },
         onClickSpanCheck: function (e) {
             var self = $(e.currentTarget);
-            if (e.currentTarget.className.search('span_ticked') >= 0){
-                self.parent().removeClass("selected");
-                self.removeClass("span_ticked");
+            if (self.is(":checked")) {
+                self.parents('li').addClass("selected");
+                // alert('checked');
+            }else{
+                self.parents('li').removeClass("selected");
+                self.parents('li').find('.lilo input').removeClass("display-block");
+                self.parents('li').find('.lilo a').removeClass("display-none");
             }
-            e.stopPropagation();
+            // if (e.currentTarget.className.search('span_ticked') >= 0){
+            //     self.parent().removeClass("selected");
+            //     // self.removeClass("span_ticked");
+            // }
+            // e.stopPropagation();
         },
         onFocusOutTextField: function (e) {
             var self = $(e.currentTarget);
@@ -66,10 +75,21 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
             var sequence = 1;
             _(this.$buttons.find(".su_fields_show li.selected")).each(function(result) {
                 var $result = $(result);
-                fields_show.push({string: $result.find('input').val().trim(), sequence: sequence, name: $result.attr("name")});
+                fields_show.push({string: $result.find('.input_l').val().trim(), sequence: sequence, name: $result.attr("name")});
                 sequence += 1;
             });
             return fields_show;
+        },
+        resetShowField: function () {
+            // var self = this;
+            var values = {model: this.modelName, view_id: this.viewInfo.view_id};
+            this._rpc({
+                model: 'show.field',
+                method: 'delete_show_fields',
+                kwargs: {values: values},
+            }).then(function (result) {
+                location.reload();
+            });
         },
         updateShowField: function () {
             // var self = this;
@@ -85,10 +105,7 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
         onClickShowField: function(e){
             e.stopPropagation();
             var self = $(e.currentTarget);
-            if (e.currentTarget.className.search('selected') < 0){
-                self.addClass("selected");
-                self.find('span').addClass("span_ticked");
-            }else{
+            if (e.currentTarget.className.search('selected') >= 0){
                 self.find('input').addClass("display-block");
                 self.find('a').addClass("display-none");
             }
