@@ -27,9 +27,21 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
         show_button = False
     # self.env.user.id or self.env.ref('su_dynamic_listview.group_show_field') in self.env.user.groups_id):
     if check and view_type in ['list', 'tree']:
+        # shf_obj = self.env['show.field'].search([('model', '=', self._name),
+        #                                          ('view_id', '=', res.get('view_id', False)),
+        #                                          ('create_uid', '=', self.env.user.id)])
         shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                  ('view_id', '=', res.get('view_id', False)),
-                                                 ('create_uid', '=', self.env.user.id)])
+                                                 ('create_uid', '=', 1)], limit=1)
+        if not shf_obj.for_all_user:
+            # if self.env.user.id != odoo.SUPERUSER_ID:
+            show_button = True
+            shf_obj = self.env['show.field'].search([('model', '=', self._name),
+                                                     ('view_id', '=', res.get('view_id', False)),
+                                                     ('create_uid', '=', self.env.user.id)], limit=1)
+        elif self.env.user.id != odoo.SUPERUSER_ID and shf_obj.for_all_user:
+            show_button = False
+        res['for_all_user'] = shf_obj.for_all_user
         if shf_obj:
             doc = etree.XML(res['arch'])
             fields_show = eval(shf_obj[0].fields_show)

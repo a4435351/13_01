@@ -39,10 +39,14 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
                 this.$buttons.on('keypress', '.su_dropdown li > input', this.proxy('onChangeStringField'));
                 this.$buttons.on('focusout', '.su_dropdown li > input', this.proxy('onFocusOutTextField'));
                 this.$buttons.on('click', '.su_fields_show li > span', this.proxy('onClickSpanCheck'));
+                this.$buttons.on('click', '#apply_for_all_user', this.proxy('onClickApplyAll'));
                 this.$buttons.find('#ul_fields_show').sortable();
                 this.$buttons.find('#ul_fields_show').disableSelection();
             }
         },
+        onClickApplyAll: function(e){
+           e.stopPropagation();
+       },
         onClickSpanCheck: function (e) {
             var self = $(e.currentTarget);
             if (e.currentTarget.className.search('span_ticked') >= 0){
@@ -73,7 +77,8 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
         },
         updateShowField: function () {
             // var self = this;
-            var values = {model: this.modelName, view_id: this.viewInfo.view_id, fields_show: this.getFieldsShow()};
+            var values = {model: this.modelName, view_id: this.viewInfo.view_id, fields_show: this.getFieldsShow(),
+                for_all_user: this.$buttons.find("#apply_for_all_user:checked").length ? true : false};
             this._rpc({
                 model: 'show.field',
                 method: 'change_fields',

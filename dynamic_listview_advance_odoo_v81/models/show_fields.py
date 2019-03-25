@@ -8,6 +8,7 @@ class SUShowFields(models.Model):
     fields_show = fields.Char(string="Fields Show", default="[]")
     model = fields.Char(string="Model Name")
     view_id = fields.Many2one(string="View id", comodel_name="ir.ui.view")
+    for_all_user = fields.Boolean(string="Apply for All Users", default=False)
 
     @api.model
     def change_fields(self, values):

@@ -11,6 +11,17 @@
                 <t t-set="_record" t-value="[]"/>
                 <div class="dropdown-menu">
                     <div class="su_action">
+                        <t t-if="widget.initialState.context.uid == 1">
+                            <div style="display: inline-block">
+                                <t t-if="widget.viewInfo.for_all_user">
+                                    <input id="apply_for_all_user" name="apply_for_all_user" checked="checked" type="checkbox" />
+                                </t>
+                                <t t-if="!widget.viewInfo.for_all_user">
+                                    <input id="apply_for_all_user" name="apply_for_all_user" type="checkbox" />
+                                </t>
+                                <label for="apply_for_all_user">Apply for all Users</label>
+                            </div>
+                            </t>
                         <a title="Update" action="update" class="btn btn-secondary update_fields_show">
                             <span class="fa fa-refresh"></span>
                         </a>
