@@ -15,6 +15,60 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
         init: function (parent, state, params) {
             this._super(parent, state, params);
             this.viewInfo = params.viewInfo;
+            this.parent = parent;
+        },
+        _renderView: function () {
+            var self = this;
+            var res = this._super();
+
+            this.$el.before("<table class='tbl_fixed'></table>");
+            var $table = this.$el.find("table");
+
+            var tableOffset = $table.offset().top;
+            var $header = this.$el.find("table thead");
+            var $tblFix = $("<table class='"+$table.attr("class")+"'></table>");
+            var $fixedHeader = $tblFix.append($header.clone()).hide();
+            $fixedHeader.find('thead').addClass('theadlala');
+            $fixedHeader.find('.theadlala .o_list_record_selector input').attr("id", "lili");
+            $fixedHeader.find('.theadlala .o_list_record_selector label').attr("for", "lili");
+            $fixedHeader.find('.theadlala .o_list_record_selector input').click(this._onToggleSelectionOk.bind(this));
+            this.$el.before($fixedHeader);
+            this.parent.$el.bind("scroll", function() {
+                var offset = $(this).scrollTop();
+                if (offset > tableOffset && $fixedHeader.is(":hidden")) {
+                    $fixedHeader.show();
+                    $tblFix.css({position: 'absolute', zIndex: 10000, tableLayout: 'fixed'});
+                    self.$el.css({overflow: 'scroll', position: 'absolute', top: '0px', bottom: '0px'});
+                    self.$el.bind("scroll", function () {
+                        var _offset = $(this).scrollTop()
+                        if (_offset > tableOffset && $fixedHeader.is(":hidden")) {
+                            $fixedHeader.show();
+                        }
+                        else if (_offset == tableOffset) {
+                            $fixedHeader.hide();
+                        }
+                    });
+                    $.each($header.find('tr > th'), function(ind,val){
+                        var original_width = $(val).outerWidth();
+                        var original_padding = $(val).css("padding");
+                        $($fixedHeader.find('tr > th')[ind]).css({padding: original_padding, display: 'inline-block', width: original_width});
+                    });
+                }
+                else if (offset == tableOffset) {
+                }
+            })
+            return res
+        },
+        _onToggleSelection: function (event) {
+            var checked = $(event.currentTarget).prop('checked') || false;
+            this.parent.$el.find('.theadlala .o_list_record_selector input').prop("checked", checked);
+            this._super(event);
+        },
+        _onToggleSelectionOk: function (event) {
+            var checked = $(event.currentTarget).prop('checked') || false;
+            this.$el.find('thead .o_list_record_selector input').prop("checked", checked);
+            this.$('tbody .o_list_record_selector input:not(":disabled")').prop('checked', checked);
+            this._updateSelection();
         },
     });
 
@@ -31,6 +85,7 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
             }
             return result;
         },
+
         renderButtons: function($node) {
             this._super($node);
             if (this.$buttons) {
@@ -109,6 +164,7 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
                 self.find('input').addClass("display-block");
                 self.find('a').addClass("display-none");
             }
-        }
+        },
+
     });
 });
