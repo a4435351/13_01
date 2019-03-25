@@ -19,8 +19,12 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
     res = _fields_view_get(self, view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
     # if view_type in ['list', 'tree'] and (odoo.SUPERUSER_ID ==
     check = False
-    if odoo.SUPERUSER_ID == self.env.user.id or ('show.field' in self.env.registry.models and self.env.ref('dynamic_listview_advance_odoo_v81.group_show_field') in self.env.user.groups_id):
+    show_button = False
+    if 'show.field' in self.env.registry.models and (odoo.SUPERUSER_ID == self.env.user.id or self.env.ref('dynamic_listview_advance_odoo_v81.group_show_field') in self.env.user.groups_id):
         check = True
+        show_button = True
+    else:
+        show_button = False
     # self.env.user.id or self.env.ref('su_dynamic_listview.group_show_field') in self.env.user.groups_id):
     if check and view_type in ['list', 'tree']:
         shf_obj = self.env['show.field'].search([('model', '=', self._name),
@@ -52,6 +56,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
                 self._name, etree.fromstring(res['arch']), view_id)
             res['arch'] = _arch
             res['fields'] = _fields
+    res['show_button'] = show_button
     return res
 
 
