@@ -39,6 +39,9 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
             shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                      ('view_id', '=', res.get('view_id', False)),
                                                      ('create_uid', '=', self.env.user.id)], limit=1)
+        elif self.env.user.id != odoo.SUPERUSER_ID and shf_obj.for_all_user:
+            show_button = False
+        res['for_all_user'] = shf_obj.for_all_user
         if shf_obj:
             doc = etree.XML(res['arch'])
             fields_show = eval(shf_obj[0].fields_show)

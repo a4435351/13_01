@@ -60,7 +60,8 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
         },
         updateShowField: function () {
             // var self = this;
-            var values = {model: this.model, view_id: this.fields_view.view_id, fields_show: this.getFieldsShow()};
+            var values = {model: this.model, view_id: this.fields_view.view_id, fields_show: this.getFieldsShow(),
+                for_all_user: this.$buttons.find("#apply_for_all_user:checked").length ? true : false};
             new Model("show.field").call('change_fields',  [values]).done(function (result) {
                 location.reload();
             });

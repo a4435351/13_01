@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-extend="ListView.buttons">
         <t t-jquery=".o_list_button_save" t-operation="after">
-            <t t-if="widget.viewInfo.show_button">
+            <t t-if="widget.fields_view.show_button">
                 <div class="btn-group o_dropdown su_fields_show" groups="group_show_field">
                     <button class="o_dropdown_toggler_btn btn btn-sm dropdown-toggle su_btn-show-fields"
                             data-toggle="dropdown" aria-expanded="true">
@@ -11,11 +11,11 @@
                     <t t-set="_record" t-value="[]"/>
                     <div class="dropdown-menu">
                         <div class="su_action">
-                            <t t-if="widget.uid == 1">
-                                <t t-if="widget.viewInfo.for_all_user">
+                            <t t-if="widget.session.uid == 1">
+                                <t t-if="widget.fields_view.for_all_user">
                                     <input id="apply_for_all_user" name="apply_for_all_user" checked="checked" type="checkbox" />
                                 </t>
-                                <t t-if="!widget.viewInfo.for_all_user">
+                                <t t-if="!widget.fields_view.for_all_user">
                                     <input id="apply_for_all_user" name="apply_for_all_user" type="checkbox" />
                                 </t>
                                 <label for="apply_for_all_user">Apply for all Users</label>
