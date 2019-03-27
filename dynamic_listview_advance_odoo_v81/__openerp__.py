@@ -1,23 +1,23 @@
 {
-    'name': 'Dynamic List Odoo 8',
-    'summary': 'Change The Odoo List view On the fly without any technical knowledge',
+    'name': 'SOUND OK',
+    'summary': '',
     'version': '1.0',
     'category': 'Web',
     'description': """
-        Change The Odoo List view On the fly without any technical knowledge
+        Dynamic ListView Advance Odoo8
     """,
-    'author': "",
+    'author': "truongdung.vd@gmail.com",
     'depends': ['web'],
-    'data': ['templates.xml',
+    'data': ['views/templates.xml',
              'security/show_fields_security.xml',
              'security/ir.model.access.csv'],
-    'price': 250.00,
+    'price': 99,
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
     'application': False,
-    'qweb': ['static/src/xml/listview_button_view.xml'],
+    'qweb': ['static/src/xml/base.xml'],
     'images': [
-        'static/description/main-image.png'
+        'static/description/module_image.png',
     ],
 }
