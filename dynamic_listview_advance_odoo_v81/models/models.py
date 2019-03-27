@@ -19,6 +19,14 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
     res = _fields_view_get(self, view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
     # if view_type in ['list', 'tree'] and (odoo.SUPERUSER_ID ==
     # self.env.user.id or self.env.ref('su_dynamic_listview.group_show_field') in self.env.user.groups_id):
+    check = False
+    show_button = False
+    if 'show.field' in self.env.registry.models and (odoo.SUPERUSER_ID == self.env.user.id or self.env.ref(
+            'dynamic_listview_advance_odoo_v81.group_show_field') in self.env.user.groups_id):
+        check = True
+        show_button = True
+    else:
+        show_button = False
     if view_type in ['list', 'tree'] and 'show.field' in self.env.registry.models:
         shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                  ('view_id', '=', res.get('view_id', False)),
@@ -27,7 +35,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
         #                                          ('view_id', '=', res.get('view_id', False)),
         #                                          ('create_uid', '=', self.env.user.id)])
         if not shf_obj.for_all_user:
-            hide_button = False
+            show_button = True
             shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                      ('view_id', '=', res.get('view_id', False)),
                                                      ('create_uid', '=', self.env.user.id)], limit=1)
@@ -58,7 +66,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
             res['arch'] = _arch
             res['fields'] = _fields
     res['fields_get'] = self.env[self._name].fields_get()
-    res['hide_button'] = hide_button
+    res['show_button'] = show_button
     return res
 
 
