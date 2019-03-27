@@ -1,5 +1,5 @@
 {
-    'name': 'SOUND OK',
+    'name': 'Dynamic Listview Odoo8',
     'summary': '',
     'version': '1.0',
     'category': 'Web',
