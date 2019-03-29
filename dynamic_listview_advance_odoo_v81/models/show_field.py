@@ -43,7 +43,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
         show_button = True
     else:
         show_button = False
-
+    fields_get = self.fields_get().keys()
     if check and view_type in ['list', 'tree']:
         shf_obj = self.env['show.field'].search([('model', '=', self._name),
                                                  ('view_id', '=', res.get('view_id', False)),
@@ -69,10 +69,11 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
                     _field.set("invisible", "0")
                     _field.set("string", _field_name['string'])
                     field_base.pop(_field_name['name'])
-                else:
+                elif _field_name['name'] in fields_get:
                     _field = etree.Element(
                         'field', {'name': _field_name['name'], 'string': _field_name['string']})
-                doc.xpath("//tree")[0].append(_field)
+                if _field is not False:
+                    doc.xpath("//tree")[0].append(_field)
             for _field_name in field_base:
                 doc.xpath("//tree")[0].append(field_base[_field_name])
             res['arch'] = etree.tostring(doc)
