@@ -64,6 +64,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
                     x.set("invisible", "1")
                     doc.remove(x)
             for _field_name in fields_show:
+                _field = False
                 if _field_name['name'] in field_base:
                     _field = field_base[_field_name['name']]
                     _field.set("invisible", "0")
