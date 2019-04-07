@@ -26,7 +26,7 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
         _get_node_string: function(field) {
             var _field = this.viewInfo.fields[field.attrs.name];
             var result = _field.string;
-            if (field.attrs.hasOwnProperty("string")) {
+            if (field.hasOwnProperty("attrs") && field.attrs.hasOwnProperty("string")) {
                 result = field.attrs.string;
             }
             return result;
