@@ -160,11 +160,10 @@ odoo.define('dynamic_listview_advance_odoo_v81.dynamic_listview', function(requi
         onClickShowField: function(e){
             e.stopPropagation();
             var self = $(e.currentTarget);
-            if (e.currentTarget.className.search('selected') >= 0){
+            if (e.currentTarget.className.search('selected') >= 0) {
                 self.find('input').addClass("display-block");
                 self.find('a').addClass("display-none");
             }
         },
-
     });
 });
