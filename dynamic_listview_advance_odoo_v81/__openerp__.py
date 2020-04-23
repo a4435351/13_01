@@ -1,17 +1,17 @@
 {
-    'name': 'Dynamic Listview Odoo8',
-    'summary': '',
+    'name': 'Dynamic ListView Advance',
+    'summary': 'Dynamic ListView Advance',
     'version': '1.0',
     'category': 'Web',
     'description': """
-        Dynamic ListView Advance Odoo8
+        Dynamic ListView Advance. Change The Odoo List view On the fly without any technical knowledge
     """,
-    'author': "truongdung.vd@gmail.com",
+    'author': "Yee Software",
     'depends': ['web'],
     'data': ['views/templates.xml',
              'security/show_fields_security.xml',
              'security/ir.model.access.csv'],
-    'price': 99,
+    'price': 110,
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
