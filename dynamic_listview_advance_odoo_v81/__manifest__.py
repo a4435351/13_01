@@ -1,12 +1,12 @@
 {
-    'name': 'SU Dynamic ListView Odoo11',
-    'summary': 'SU Dynamic ListView Odoo 11',
+    'name': 'Dynamic ListView Advance',
+    'summary': 'Dynamic ListView Advance',
     'version': '1.0',
     'category': 'Web',
     'description': """
-        SU Dynamic ListView Odoo 11
+        Dynamic ListView Advance. Change The Odoo List view On the fly without any technical knowledge.
     """,
-    'author': "truongdung.vd@gmail.com",
+    'author': "Yee Software",
     'depends': ['web'],
     'data': [
         'views/templates.xml',
@@ -17,7 +17,7 @@
         'static/src/xml/base.xml',
     ],
     'images': ['images/main_screen.jpg'],
-    'price': 250,
+    'price': 110,
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
