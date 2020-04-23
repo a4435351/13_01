@@ -16,6 +16,7 @@
     'qweb': [
         'static/src/xml/base.xml',
     ],
+    'license': 'OPL-1',
     'images': ['images/main_screen.jpg'],
     'price': 110,
     'currency': 'EUR',
