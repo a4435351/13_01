@@ -18,6 +18,7 @@
     ],
     'images': ['images/main_screen.jpg'],
     'price': 110,
+    'license': 'OPL-1',
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
