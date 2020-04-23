@@ -12,6 +12,7 @@
              'security/show_fields_security.xml',
              'security/ir.model.access.csv'],
     'price': 110,
+    'license': 'OPL-1',
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,
