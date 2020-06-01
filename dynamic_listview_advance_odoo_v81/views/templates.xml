@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="su_dynamic_list" name="su_dynamic_list templates" inherit_id="web.assets_backend">
+        <template id="dynamic_odoo" name="dynamic_odoo templates" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/dynamic_listview_advance_odoo_v81/static/src/less/base.less"/>
+                <link rel="stylesheet" type="text/css" href="/dynamic_listview_advance_odoo_v81/static/src/css/daterangepicker.css"/>
                 <link rel="stylesheet" type="text/less" href="/dynamic_listview_advance_odoo_v81/static/src/less/dynamic_listview.less"/>
-                <script type="text/javascript" src="/dynamic_listview_advance_odoo_v81/static/src/js/list_view.js"></script>
+                <link rel="stylesheet" type="text/less" href="/dynamic_listview_advance_odoo_v81/static/src/less/edit_view_controller.less"/>
+                <script type="text/javascript" src="/dynamic_listview_advance_odoo_v81/static/src/libs/daterangepicker.js"></script>
+                <script type="text/javascript" src="/dynamic_listview_advance_odoo_v81/static/src/js/views/list/list_view.js"></script>
+                <script type="text/javascript" src="/dynamic_listview_advance_odoo_v81/static/src/js/views/list/list_controller.js"></script>
+                <script type="text/javascript" src="/dynamic_listview_advance_odoo_v81/static/src/js/views/list/list_renderer.js"></script>
+                <script type="text/javascript" src="/dynamic_listview_advance_odoo_v81/static/src/js/views/search/search_view.js"></script>
+
             </xpath>
         </template>
     </data>
