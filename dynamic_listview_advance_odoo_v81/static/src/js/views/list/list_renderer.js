@@ -28,7 +28,7 @@ odoo.define('dynamic_listview_advance_odoo_v81.list_renderer', function(require)
             // var many2many_tag = new relational_fields.FieldMany2ManyTags(self,
             //     name, this.state, {mode: 'edit', viewType: "list"});
             // many2many_tag.appendTo(container);
-            var many2one = new FieldMany2One(self, name, {...this.state, domain: [], getDomain: () => {return []}}, {
+            var many2one = new FieldMany2One(self, name, {...this.state, domain: [], getContext: () => {return []}, getDomain: () => {return []}}, {
                 mode: 'edit',
                 viewType: this.viewType,
             });
@@ -56,12 +56,26 @@ odoo.define('dynamic_listview_advance_odoo_v81.list_renderer', function(require)
 
             many2one._setValue = _setValue.bind(many2one);
         },
-        _selectRow: function (rowIndex) {
+        _selectCell: function (rowIndex, fieldIndex, options) {
             if (this.showSearchAdvance) {
                 rowIndex -= 1;
             }
-            return this._super(rowIndex);
+            return this._super(rowIndex, fieldIndex, options);
         },
+        setRowMode: function (recordID, mode) {
+            let res = this._super(recordID, mode);
+            if (this.showSearchAdvance) {
+                var $row = this._getRow(recordID);
+                this.currentRow = $row.prop('rowIndex') - 2;
+            }
+            return res;
+        },
+        // _selectRow: function (rowIndex) {
+        //     if (this.showSearchAdvance) {
+        //         rowIndex -= 1;
+        //     }
+        //     return this._super(rowIndex);
+        // },
         renderFieldInput: function (field, container) {
             let self = this, view = $('<input>'), {name} = field;
             // view.change(function () {
